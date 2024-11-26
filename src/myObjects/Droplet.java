@@ -1,9 +1,9 @@
 package myObjects;
 
-import myEnums.Amounts;
+import myAbstractions.PhysicalObject;
 import myEnums.Locations;
 
-public class Droplet extends MyObject{
+public class Droplet extends PhysicalObject {
     public Droplet(String nm, int amount, String dcrpt){
         super(nm, amount, dcrpt);
     }
@@ -19,7 +19,6 @@ public class Droplet extends MyObject{
     }
 
     @Override
-    public String toString(){return
-            (getAmount().equals(Amounts.ONE) ? "": getAmount() + " " ) + "капля " +
+    public String toString(){return getAmount() + " капля " +
             getName() + (getDescription().isEmpty() ? "": ": " + getDescription());}
 }

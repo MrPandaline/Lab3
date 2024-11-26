@@ -1,8 +1,11 @@
 package myObjects;
 
+import myAbstractions.MyCompositeObject;
+import myAbstractions.MyObject;
+
 import java.util.ArrayList;
 
-public class Image extends MyCompositeObject{
+public class Image extends MyCompositeObject {
     public Image(String nm, int amount, String dcrpt){
         super(nm, amount, dcrpt);
     }

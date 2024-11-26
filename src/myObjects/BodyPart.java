@@ -1,8 +1,9 @@
 package myObjects;
 
+import myAbstractions.PhysicalObject;
 import myEnums.BodyPartEnum;
 
-public class BodyPart extends MyObject{
+public class BodyPart extends PhysicalObject {
 
     BodyPartEnum bodyPartType;
 

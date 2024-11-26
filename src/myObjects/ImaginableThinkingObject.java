@@ -1,11 +1,14 @@
 package myObjects;
 
+import myAbstractions.InanimateObject;
+import myAbstractions.MyCompositeObject;
+import myAbstractions.MyObject;
 import myEnums.BodyPartEnum;
 import myInterfaces.IThinkingObject;
 
 import java.util.ArrayList;
 
-public class ImaginableThinkingObject extends MyCompositeObject implements IThinkingObject{
+public class ImaginableThinkingObject extends InanimateObject{
     public ImaginableThinkingObject(String nm, int amount, String dcrpt){
         super(nm, amount, dcrpt);
     }
@@ -29,25 +32,6 @@ public class ImaginableThinkingObject extends MyCompositeObject implements IThin
         else {
             return description;
         }
-    }
-
-    @Override
-    public void ensure(String fact) {
-        System.out.println(this + " будто убеждается, что " + fact);
-    }
-    @Override
-    public String suspect(IThinkingObject aim) {
-        String message = this + " подозревает " + aim;
-        System.out.println(this + " подозревает " + aim);
-        return message;
-    }
-    @Override
-    public void rethink(String fact){
-        System.out.println(this + " будто обдумывает " + fact);
-    }
-    @Override
-    public void simulate(State fact){
-        System.out.println(this + " будто притворяется, что " + fact);
     }
 
     public void iSay(String phrase){

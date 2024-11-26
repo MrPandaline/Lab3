@@ -1,11 +1,11 @@
-package myObjects;
+package myAbstractions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public abstract class MyCompositeObject extends MyObject{
-    private ArrayList<MyObject> objectParts;
+public abstract class MyCompositeObject extends PhysicalObject{
+    private ArrayList<PhysicalObject> objectParts;
     {
         objectParts = new ArrayList<>();
     }
@@ -23,8 +23,8 @@ public abstract class MyCompositeObject extends MyObject{
         super(nm);
     }
 
-    public void addObjectParts(MyObject part){ //надо бы посмотреть и тоже подправить
-        MyObject[] locCopyObjectParts = objectParts.toArray(new MyObject[0]);
+    public void addObjectParts(PhysicalObject part){ //надо бы посмотреть и тоже подправить
+        PhysicalObject[] locCopyObjectParts = objectParts.toArray(new PhysicalObject[0]);
         boolean alreadyInObjectParts = false;
         for (int i = 0; i< locCopyObjectParts.length; i++ ) {
             if (locCopyObjectParts[i].getName().equals(part.getName())){
@@ -49,13 +49,13 @@ public abstract class MyCompositeObject extends MyObject{
         return false;
     }
 
-    public ArrayList<MyObject> getObjectParts() {
+    public ArrayList<PhysicalObject> getObjectParts() {
         return objectParts;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getStates(), getLocation(), getObjectParts()); // Генерация хэш-кода
+        return super.hashCode() + objectParts.hashCode(); // Генерация хэш-кода
     }
 
 }

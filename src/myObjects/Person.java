@@ -1,13 +1,19 @@
 package myObjects;
 
+import myAbstractions.AliveObject;
+import myAbstractions.MyObject;
+import myAbstractions.PhysicalObject;
 import myEnums.BodyPartEnum;
+import myEnums.Daytime;
 import myEnums.Locations;
 import myInterfaces.IThinkingObject;
+import states.AliveObjectState;
+import states.WorldState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Person extends MyCompositeObject implements IThinkingObject {
+public class Person extends AliveObject implements IThinkingObject {
     private ArrayList<MyObject> inventory;
 
     {
@@ -47,7 +53,7 @@ public class Person extends MyCompositeObject implements IThinkingObject {
 
     public ArrayList<MyObject> getInventory(){return inventory;}
 
-    public void addToInventory(MyObject obj){
+    public void addToInventory(PhysicalObject obj){
         MyObject[] locCopyInventory = inventory.toArray(new MyObject[0]);
         boolean alreadyInObjectParts = false;
         for (int i = 0; i< locCopyInventory.length; i++ ) {
@@ -75,12 +81,12 @@ public class Person extends MyCompositeObject implements IThinkingObject {
 
 
     public void sleep(){
-        State sleeping = new State("спит");
+        AliveObjectState sleeping = new AliveObjectState("спит");
         if (isHaveState(sleeping)) {
             this.removeState(sleeping);
             System.out.println(this + " больше не " + sleeping.stateName());
         }
-        else{
+        else if (WorldCondition.getInstance().isHaveState(new WorldState("время", Daytime.NIGHT.toString()))){
             this.addState(sleeping);
             System.out.println(this + " " + sleeping.stateName());
         }
@@ -106,7 +112,7 @@ public class Person extends MyCompositeObject implements IThinkingObject {
         }
     }
 
-    public void walk(MyObject aim) {
+    public void walk(PhysicalObject aim) {
         System.out.println(this + " идёт к " + aim + " в " + aim.getLocation());
         setLocation(aim.getLocation());
     }
@@ -118,7 +124,7 @@ public class Person extends MyCompositeObject implements IThinkingObject {
         // если нет, то бросить логическое исключение
     }
 
-    public void see(MyObject object){
+    public void see(PhysicalObject object){
         if (object.getLocation().equals(getLocation())){
             System.out.println(this + " увидел " + object);
         }

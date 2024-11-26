@@ -1,12 +1,12 @@
-package myObjects;
+package states;
 
-public record State(String stateName, String stateDescription) {
-    public State(String stateName, String stateDescription) {
+public record InanimateObjectState(String stateName, String stateDescription) {
+    public InanimateObjectState(String stateName, String stateDescription) {
         this.stateName = stateName.toLowerCase();
         this.stateDescription = stateDescription.toLowerCase();
     }
 
-    public State(String stateName) {
+    public InanimateObjectState(String stateName) {
         this(stateName, "");
     }
 

@@ -1,6 +1,7 @@
 package myObjects;
 
 import myInterfaces.IThinkingObject;
+import states.AliveObjectState;
 
 public class Witch extends Person{
     public Witch(String nm, int amount, String dcrptn){
@@ -14,7 +15,7 @@ public class Witch extends Person{
     }
 
     public void charm(IThinkingObject aim){
-        aim.addState(new State("околдованный"));
+        aim.addState(new AliveObjectState("околдованный"));
         System.out.println("Ведьма " + this + " околдовывает " + aim);
     }
 }

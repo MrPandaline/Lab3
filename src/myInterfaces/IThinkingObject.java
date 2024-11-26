@@ -1,6 +1,7 @@
 package myInterfaces;
 
-import myObjects.State;
+import states.AliveObjectState;
+import states.InanimateObjectState;
 
 public interface IThinkingObject {
     default void ensure(String fact) {
@@ -10,7 +11,7 @@ public interface IThinkingObject {
     default String suspect(IThinkingObject aim) {
         String message = this + " подозревает " + aim;
         System.out.println(this + " подозревает " + aim);
-        aim.addState(new State("подозрительный"));
+        aim.addState(new AliveObjectState("подозрительный"));
         return message;
     }
 
@@ -18,9 +19,9 @@ public interface IThinkingObject {
         System.out.println(this + " перетолковывает " + fact);
     }
 
-    default void simulate(State fact){
+    default void simulate(InanimateObjectState fact){
         System.out.println(this + " претворяется, что находится в состоянии " + fact);
     }
 
-    void addState(State state);
+    void addState(AliveObjectState inanimateObjectState);
 }
