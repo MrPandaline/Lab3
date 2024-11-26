@@ -17,13 +17,13 @@ public class Main {
         Person king = new Person("Король");
         Witch queen = new Witch("Элиза", 1, "Королева");
         Person nation = new Person("человек", Integer.MAX_VALUE);
-        ImaginableObject saints = new ImaginableObject("святой", Integer.MAX_VALUE);
-        ImaginableObject evilWords = new ImaginableObject("слово", Integer.MAX_VALUE, "злое");
+        ImaginableThinkingObject saints = new ImaginableThinkingObject("святой", Integer.MAX_VALUE);
+        AbstractObject evilWords = new AbstractObject("слово", Integer.MAX_VALUE, "злое");
         Image image = new Image("образ", 1, "резное");
         Droplet tears = new Droplet("слеза", 2, "крупная");
-        ImaginableObject doubt = new ImaginableObject("сомнение", 1);
-        ImaginableObject despair = new ImaginableObject("отчаяние", 1);
-        ImaginableObject dream = new ImaginableObject("сон", 1);
+        AbstractObject doubt = new AbstractObject("сомнение", 1);
+        AbstractObject despair = new AbstractObject("отчаяние", 1);
+        AbstractObject dream = new AbstractObject("сон", 1);
 
 
         image.addObjectParts(saints);

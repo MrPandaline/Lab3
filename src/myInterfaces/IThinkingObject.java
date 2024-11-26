@@ -1,6 +1,5 @@
 package myInterfaces;
 
-import myObjects.Person;
 import myObjects.State;
 
 public interface IThinkingObject {
@@ -8,7 +7,7 @@ public interface IThinkingObject {
         System.out.println(this + " убеждается, что " + fact);
     }
 
-    default String suspect(Person aim) {
+    default String suspect(IThinkingObject aim) {
         String message = this + " подозревает " + aim;
         System.out.println(this + " подозревает " + aim);
         aim.addState(new State("подозрительный"));
@@ -20,6 +19,8 @@ public interface IThinkingObject {
     }
 
     default void simulate(State fact){
-        System.out.println(this + " претворяется, что " + fact);
+        System.out.println(this + " претворяется, что находится в состоянии " + fact);
     }
+
+    void addState(State state);
 }

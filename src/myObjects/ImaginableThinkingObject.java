@@ -5,14 +5,14 @@ import myInterfaces.IThinkingObject;
 
 import java.util.ArrayList;
 
-public class ImaginableObject extends MyCompositeObject implements IThinkingObject {
-    public ImaginableObject(String nm, int amount, String dcrpt){
+public class ImaginableThinkingObject extends MyCompositeObject implements IThinkingObject{
+    public ImaginableThinkingObject(String nm, int amount, String dcrpt){
         super(nm, amount, dcrpt);
     }
-    public ImaginableObject(String nm, int amount){
+    public ImaginableThinkingObject(String nm, int amount){
         super(nm, amount);
     }
-    public ImaginableObject(String nm){
+    public ImaginableThinkingObject(String nm){
         super(nm);
     }
 
@@ -36,7 +36,7 @@ public class ImaginableObject extends MyCompositeObject implements IThinkingObje
         System.out.println(this + " будто убеждается, что " + fact);
     }
     @Override
-    public String suspect(Person aim) {
+    public String suspect(IThinkingObject aim) {
         String message = this + " подозревает " + aim;
         System.out.println(this + " подозревает " + aim);
         return message;
@@ -48,21 +48,6 @@ public class ImaginableObject extends MyCompositeObject implements IThinkingObje
     @Override
     public void simulate(State fact){
         System.out.println(this + " будто притворяется, что " + fact);
-    }
-
-    public void iRunFrom(MyObject object){
-        System.out.println(this + " будто убегает от " + object);
-    }
-
-    public void iFallFrom(MyObject object){
-        System.out.println(this + " будто сыпется с " + object);
-    }
-
-    public void iReown(MyObject object, MyCompositeObject prevOwner){
-        if (prevOwner.isHavePart(object)) {
-            System.out.println(this + " будто завладевает " + object + " которое принадлежит " + prevOwner);
-        }
-        // надо бросать исключение
     }
 
     public void iSay(String phrase){

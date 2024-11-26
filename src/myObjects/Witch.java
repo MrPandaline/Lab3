@@ -1,5 +1,7 @@
 package myObjects;
 
+import myInterfaces.IThinkingObject;
+
 public class Witch extends Person{
     public Witch(String nm, int amount, String dcrptn){
         super(nm, amount, dcrptn);
@@ -11,7 +13,7 @@ public class Witch extends Person{
         super(nm);
     }
 
-    public void charm(Person aim){
+    public void charm(IThinkingObject aim){
         aim.addState(new State("околдованный"));
         System.out.println("Ведьма " + this + " околдовывает " + aim);
     }
