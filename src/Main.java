@@ -1,4 +1,3 @@
-import myEnums.BodyPartEnum;
 import myEnums.Daytime;
 import myEnums.Locations;
 import myObjects.*;
@@ -28,7 +27,7 @@ public class Main {
 
 
         image.addObjectParts(saints);
-        saints.addObjectParts(new BodyPart(BodyPartEnum.HEAD));
+        saints.addObjectParts(new BodyPart("голова"));
 
         archbishop.addState(new AliveObjectState("спит"));
 
@@ -47,18 +46,19 @@ public class Main {
         king.walk(archbishop);
         archbishop.say("что видел и подозревал", king);
         evilWords.iFallFrom(king.getObjectParts().get(king.
-                getObjectParts().indexOf(new BodyPart(BodyPartEnum.CHEEKS))));
+                getObjectParts().indexOf(new BodyPart("щёки"))));
         System.out.println(image.getName() + ": " + image.getDescription());
-        saints.ishake(BodyPartEnum.HEAD);
+        saints.ishake("голова");
         saints.iSay("Неправда, элиза невинна!");
         archbishop.rethink("это");
         //сделать метод свидетельствовать, который возвращает String
-        archbishop.say("святые свядетельствуют против неё, неодобрительно качая головами");
-        tears.moveAt(Locations.KING_CHEEKS);
+        archbishop.say("святые сведетельствуют против неё, неодобрительно качая головами");
+        tears.moveAt(king.getObjectParts().get(king.
+                getObjectParts().indexOf(new BodyPart("щёки"))));
         doubt.iReown(king.getObjectParts().get(king.
-                getObjectParts().indexOf(new BodyPart(BodyPartEnum.HEART))), king);
+                getObjectParts().indexOf(new BodyPart("сердце"))), king);
         despair.iReown(king.getObjectParts().get(king.
-                getObjectParts().indexOf(new BodyPart(BodyPartEnum.HEART))), king);
+                getObjectParts().indexOf(new BodyPart("сердце"))), king);
 
         king.walk(Locations.SLEEPING_ROOM);
 

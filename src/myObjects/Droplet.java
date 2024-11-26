@@ -14,7 +14,7 @@ public class Droplet extends PhysicalObject {
         super(nm);
     }
 
-    public void moveAt(Locations loca){
+    public void moveAt(PhysicalObject loca){
         System.out.println(this + " катятся по " + loca);
     }
 

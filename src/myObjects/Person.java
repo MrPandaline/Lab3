@@ -3,9 +3,10 @@ package myObjects;
 import myAbstractions.AliveObject;
 import myAbstractions.MyObject;
 import myAbstractions.PhysicalObject;
-import myEnums.BodyPartEnum;
 import myEnums.Daytime;
 import myEnums.Locations;
+import myInterfaces.IEnchantableObject;
+import myInterfaces.ISuspectableObject;
 import myInterfaces.IThinkingObject;
 import states.AliveObjectState;
 import states.WorldState;
@@ -13,8 +14,8 @@ import states.WorldState;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Person extends AliveObject implements IThinkingObject {
-    private ArrayList<MyObject> inventory;
+public class Person extends AliveObject implements IThinkingObject, IEnchantableObject, ISuspectableObject {
+    private ArrayList<PhysicalObject> inventory;
 
     {
         inventory = new ArrayList<>();
@@ -46,15 +47,16 @@ public class Person extends AliveObject implements IThinkingObject {
     }
 
     {
-        for (BodyPartEnum bpart: BodyPartEnum.values()){
+        String[] bodyParts = {"язык", "щёки", "мозг", "сердце", "ноги", "голова"};
+        for (String bpart: bodyParts){
             addObjectParts(new BodyPart(bpart));
         }
     }
 
-    public ArrayList<MyObject> getInventory(){return inventory;}
+    public ArrayList<PhysicalObject> getInventory(){return inventory;}
 
     public void addToInventory(PhysicalObject obj){
-        MyObject[] locCopyInventory = inventory.toArray(new MyObject[0]);
+        PhysicalObject[] locCopyInventory = inventory.toArray(new PhysicalObject[0]);
         boolean alreadyInObjectParts = false;
         for (int i = 0; i< locCopyInventory.length; i++ ) {
             if (locCopyInventory[i].getName().equals(obj.getName())){
@@ -117,9 +119,9 @@ public class Person extends AliveObject implements IThinkingObject {
         setLocation(aim.getLocation());
     }
 
-    public void shake(BodyPartEnum bodyPart){
+    public void shake(String bodyPart){
         if (isHavePart(new BodyPart(bodyPart))){
-            System.out.println(this + " трясёт " + bodyPart.toString());
+            System.out.println(this + " трясёт " + bodyPart);
         }
         // если нет, то бросить логическое исключение
     }
@@ -133,5 +135,15 @@ public class Person extends AliveObject implements IThinkingObject {
     public void disappear(){
         System.out.println(this + " скрывается из " + getLocation());
         setLocation(Locations.SOMEWHERE);
+    }
+
+    @Override
+    public void beEnchanted(){
+        addState(new AliveObjectState("зачарован"));
+    }
+
+    @Override
+    public void beSuspected(){
+        addState(new AliveObjectState("подозрительный"));
     }
 }

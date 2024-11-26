@@ -1,14 +1,13 @@
 package myObjects;
 
 import myAbstractions.InanimateObject;
-import myAbstractions.MyCompositeObject;
 import myAbstractions.MyObject;
-import myEnums.BodyPartEnum;
-import myInterfaces.IThinkingObject;
+import myInterfaces.IEnchantableObject;
+import states.InanimateObjectState;
 
 import java.util.ArrayList;
 
-public class ImaginableThinkingObject extends InanimateObject{
+public class ImaginableThinkingObject extends InanimateObject implements IEnchantableObject {
     public ImaginableThinkingObject(String nm, int amount, String dcrpt){
         super(nm, amount, dcrpt);
     }
@@ -38,10 +37,15 @@ public class ImaginableThinkingObject extends InanimateObject{
         System.out.println(this + " будто хотел сказать " + phrase);
     }
 
-    public void ishake(BodyPartEnum bodyPart){
+    public void ishake(String bodyPart){
         if (isHavePart(new BodyPart(bodyPart))){
-            System.out.println(this + " будто трясёт " + bodyPart.toString());
+            System.out.println(this + " будто трясёт " + bodyPart);
         }
         // если нет, то бросить логическое исключение
+    }
+
+    @Override
+    public void beEnchanted() {
+        addState(new InanimateObjectState("зачарован"));
     }
 }

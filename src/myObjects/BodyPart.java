@@ -1,22 +1,21 @@
 package myObjects;
 
 import myAbstractions.PhysicalObject;
-import myEnums.BodyPartEnum;
 
 public class BodyPart extends PhysicalObject {
 
-    BodyPartEnum bodyPartType;
+    String bodyPartType;
 
-    public BodyPart(BodyPartEnum partType) {
+    public BodyPart(String partType) {
         this(partType, 1);
         bodyPartType = partType;
     }
 
-    public BodyPart(BodyPartEnum partType, int amount){
+    public BodyPart(String partType, int amount){
         this(partType, amount ,"");
     }
 
-    public BodyPart(BodyPartEnum partType, int amount, String dcrptn){
-        super(partType.toString(), amount, dcrptn);
+    public BodyPart(String partType, int amount, String description){
+        super(partType, amount, description);
     }
 }

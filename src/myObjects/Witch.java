@@ -1,5 +1,6 @@
 package myObjects;
 
+import myInterfaces.IEnchantableObject;
 import myInterfaces.IThinkingObject;
 import states.AliveObjectState;
 
@@ -14,8 +15,8 @@ public class Witch extends Person{
         super(nm);
     }
 
-    public void charm(IThinkingObject aim){
-        aim.addState(new AliveObjectState("околдованный"));
+    public void charm(IEnchantableObject aim){
+        aim.beEnchanted();
         System.out.println("Ведьма " + this + " околдовывает " + aim);
     }
 }

@@ -40,8 +40,8 @@ public abstract class MyCompositeObject extends PhysicalObject{
         }
     }
 
-    public boolean isHavePart(MyObject part){
-        for(MyObject partIterable: objectParts){
+    public boolean isHavePart(PhysicalObject part){
+        for(PhysicalObject partIterable: objectParts){
             if(partIterable.getName().equals(part.getName())){
                 return true;
             }

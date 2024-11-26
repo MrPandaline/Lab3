@@ -8,10 +8,10 @@ public interface IThinkingObject {
         System.out.println(this + " убеждается, что " + fact);
     }
 
-    default String suspect(IThinkingObject aim) {
+    default String suspect(ISuspectableObject aim) {
         String message = this + " подозревает " + aim;
         System.out.println(this + " подозревает " + aim);
-        aim.addState(new AliveObjectState("подозрительный"));
+        aim.beSuspected();
         return message;
     }
 
@@ -23,5 +23,4 @@ public interface IThinkingObject {
         System.out.println(this + " претворяется, что находится в состоянии " + fact);
     }
 
-    void addState(AliveObjectState inanimateObjectState);
 }
