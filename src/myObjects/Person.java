@@ -3,21 +3,16 @@ package myObjects;
 import myAbstractions.AliveObject;
 import myAbstractions.MyObject;
 import myAbstractions.PhysicalObject;
-import myEnums.Daytime;
 import myEnums.Locations;
 import myExceptions.LogicalContradiction;
 import myExceptions.WrongAmountException;
-import myInterfaces.IEnchantableObject;
-import myInterfaces.ISuspectableObject;
+import myInterfaces.PhysicalObjectArrayListFunc;
 import myInterfaces.IThinkingObject;
-import states.AliveObjectState;
-import states.WorldState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Person extends AliveObject implements IThinkingObject{
-    private ArrayList<PhysicalObject> inventory;
+    private final ArrayList<PhysicalObject> inventory;
     {
         inventory = new ArrayList<>();
     }
@@ -61,21 +56,8 @@ public class Person extends AliveObject implements IThinkingObject{
     public ArrayList<PhysicalObject> getInventory(){return inventory;}
 
     public void addToInventory(PhysicalObject obj){
-        PhysicalObject[] locCopyInventory = inventory.toArray(new PhysicalObject[0]);
-        boolean alreadyInObjectParts = false;
-        for (int i = 0; i< locCopyInventory.length; i++ ) {
-            if (locCopyInventory[i].getName().equals(obj.getName())){
-                alreadyInObjectParts = true;
-                locCopyInventory[i] = obj;
-            }
-        }
-        if(alreadyInObjectParts) {
-            inventory = new ArrayList<>(Arrays.asList(locCopyInventory));
-        }
-        else{
-            inventory.add(obj);
-        }
-
+        PhysicalObjectArrayListFunc inventoryAdder = (a) -> PhysicalObjectArrayListFunc.addToList(a, obj);
+        inventoryAdder.doWithList(inventory);
     }
     public boolean isHaveInInventory(MyObject obj){
         for(MyObject partIterable: inventory){

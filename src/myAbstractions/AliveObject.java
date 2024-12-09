@@ -23,34 +23,28 @@ public abstract class AliveObject extends MyCompositeObject implements IEnchanta
     public AliveObject(String nm){
         super(nm);
     }
-    private ArrayList<AliveObjectState> aliveObjectStates;
+    private final ArrayList<AliveObjectState> aliveObjectStates;
     {
         aliveObjectStates = new ArrayList<>();
     }
-    public ArrayList<AliveObjectState> getStates(){return aliveObjectStates;}
 
     public void addState(AliveObjectState AliveObjectState){
-        AliveObjectState[] locCopyaliveObjectStates = aliveObjectStates.toArray(new AliveObjectState[0]);
         boolean alreadyInStates = false;
-        for (int i = 0; i< locCopyaliveObjectStates.length; i++ ) {
-            if (locCopyaliveObjectStates[i].stateName().equals(AliveObjectState.stateName())){
+        for (int i = 0; i< aliveObjectStates.size(); i++ ) {
+            if (aliveObjectStates.get(i).stateName().equals(AliveObjectState.stateName())){
                 alreadyInStates = true;
-                locCopyaliveObjectStates[i] = AliveObjectState;
+                aliveObjectStates.set(i, AliveObjectState);
                 break;
             }
         }
-        if(alreadyInStates) {
-            aliveObjectStates = new ArrayList<>(Arrays.asList(locCopyaliveObjectStates));
-        }
-        else{
+        if(!alreadyInStates) {
             aliveObjectStates.add(AliveObjectState);
         }
     }
 
     public void removeState(AliveObjectState AliveObjectState){
-        AliveObjectState[] locCopyaliveObjectStates = aliveObjectStates.toArray(new AliveObjectState[0]);
         boolean alreadyInStates = false;
-        for (AliveObjectState locCopyAliveObjectState : locCopyaliveObjectStates) {
+        for (AliveObjectState locCopyAliveObjectState : aliveObjectStates) {
             if (locCopyAliveObjectState.stateName().equals(AliveObjectState.stateName())) {
                 alreadyInStates = true;
                 break;

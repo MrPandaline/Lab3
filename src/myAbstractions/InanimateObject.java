@@ -17,34 +17,28 @@ public abstract class InanimateObject extends MyCompositeObject{
         super(nm);
     }
 
-    private ArrayList<InanimateObjectState> inanimateObjectStates;
+    private final ArrayList<InanimateObjectState> inanimateObjectStates;
     {
         inanimateObjectStates = new ArrayList<>();
     }
-    public ArrayList<InanimateObjectState> getStates(){return inanimateObjectStates;}
 
     public void addState(InanimateObjectState inanimateObjectState){
-        InanimateObjectState[] locCopyInanimateObjectStates = inanimateObjectStates.toArray(new InanimateObjectState[0]);
         boolean alreadyInStates = false;
-        for (int i = 0; i< locCopyInanimateObjectStates.length; i++ ) {
-            if (locCopyInanimateObjectStates[i].stateName().equals(inanimateObjectState.stateName())){
+        for (int i = 0; i< inanimateObjectStates.size(); i++ ) {
+            if (inanimateObjectStates.get(i).stateName().equals(inanimateObjectState.stateName())){
                 alreadyInStates = true;
-                locCopyInanimateObjectStates[i] = inanimateObjectState;
+                inanimateObjectStates.set(i, inanimateObjectState);
                 break;
             }
         }
-        if(alreadyInStates) {
-            inanimateObjectStates = new ArrayList<>(Arrays.asList(locCopyInanimateObjectStates));
-        }
-        else{
+        if(!alreadyInStates) {
             inanimateObjectStates.add(inanimateObjectState);
         }
     }
 
     public void removeState(InanimateObjectState inanimateObjectState){
-        InanimateObjectState[] locCopyInanimateObjectStates = inanimateObjectStates.toArray(new InanimateObjectState[0]);
         boolean alreadyInStates = false;
-        for (InanimateObjectState locCopyInanimateObjectState : locCopyInanimateObjectStates) {
+        for (InanimateObjectState locCopyInanimateObjectState : inanimateObjectStates) {
             if (locCopyInanimateObjectState.stateName().equals(inanimateObjectState.stateName())) {
                 alreadyInStates = true;
                 break;

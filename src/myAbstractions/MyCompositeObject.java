@@ -1,13 +1,12 @@
 package myAbstractions;
 
 import myExceptions.WrongAmountException;
+import myInterfaces.PhysicalObjectArrayListFunc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 public abstract class MyCompositeObject extends PhysicalObject{
-    private ArrayList<PhysicalObject> objectParts;
+    private final ArrayList<PhysicalObject> objectParts;
     {
         objectParts = new ArrayList<>();
     }
@@ -25,21 +24,9 @@ public abstract class MyCompositeObject extends PhysicalObject{
         super(nm);
     }
 
-    public void addObjectParts(PhysicalObject part){ //надо бы посмотреть и тоже подправить
-        PhysicalObject[] locCopyObjectParts = objectParts.toArray(new PhysicalObject[0]);
-        boolean alreadyInObjectParts = false;
-        for (int i = 0; i< locCopyObjectParts.length; i++ ) {
-            if (locCopyObjectParts[i].getName().equals(part.getName())){
-                alreadyInObjectParts = true;
-                locCopyObjectParts[i] = part;
-            }
-        }
-        if(alreadyInObjectParts) {
-            objectParts = new ArrayList<>(Arrays.asList(locCopyObjectParts));
-        }
-        else{
-            objectParts.add(part);
-        }
+    public void addObjectParts(PhysicalObject part){
+        PhysicalObjectArrayListFunc addObjectParts = arrayList -> PhysicalObjectArrayListFunc.addToList(arrayList, part);
+        addObjectParts.doWithList(objectParts);
     }
 
     public boolean isHavePart(PhysicalObject part){

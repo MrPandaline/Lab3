@@ -3,10 +3,9 @@ package myObjects;
 import states.WorldState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public final class World {
-    private ArrayList<WorldState> worldStates;
+    private final ArrayList<WorldState> worldStates;
     private static World instance;
 
     {
@@ -20,21 +19,15 @@ public final class World {
         }
     }
 
-    public ArrayList<WorldState> getWorldStates(){ return worldStates;}
-
     public void addWorldState(WorldState worldInanimateObjectState){
-        WorldState[] locWorldStates = worldStates.toArray(new WorldState[0]);
         boolean alreadyInStates = false;
-        for (int i = 0; i< locWorldStates.length; i++ ) {
-            if (locWorldStates[i].toString().equals(worldInanimateObjectState.toString())){
+        for (int i = 0; i< worldStates.size(); i++ ) {
+            if (worldStates.get(i).toString().equals(worldInanimateObjectState.toString())){
                 alreadyInStates = true;
-                locWorldStates[i] = worldInanimateObjectState;
+                worldStates.set(i, worldInanimateObjectState);
             }
         }
-        if(alreadyInStates) {
-            worldStates = new ArrayList<>(Arrays.asList(locWorldStates));
-        }
-        else{
+        if(!alreadyInStates) {
             this.worldStates.add(worldInanimateObjectState);
         }
         System.out.println("Стало " + worldInanimateObjectState.toString());

@@ -7,11 +7,6 @@ import states.AliveObjectState;
 import states.InanimateObjectState;
 import states.WorldState;
 
-@FunctionalInterface
-interface Randomization {
-    boolean predict(double a);
-}
-
 public class Script {
     final byte COUNT_OF_NIGHTS;
     final boolean RANDOMIZED;
@@ -27,8 +22,6 @@ public class Script {
     }
 
     public void playScript() throws WrongAmountException {
-        Randomization probability = a -> Math.random() < a;
-        Randomization randomizedIntLessThan = a -> Math.random() * a;
         boolean scenatioCompleted = false;
         while (!scenatioCompleted) {
             try {
@@ -44,7 +37,7 @@ public class Script {
                 Person archbishop = new Person("Архиепископ");
                 Person king = new Person("Король");
                 Person queen;
-                if (RANDOMIZED && probability.predict(0.5)) {
+                if (RANDOMIZED && Math.random() < 0.5) {
                     queen = new Person("Элиза", 1, "Королева");
                 } else {
                     queen = new Witch("Элиза", 1, "Королева");
