@@ -5,6 +5,8 @@ import myAbstractions.MyObject;
 import myAbstractions.PhysicalObject;
 import myEnums.Daytime;
 import myEnums.Locations;
+import myExceptions.LogicalContradiction;
+import myExceptions.WrongAmountException;
 import myInterfaces.IEnchantableObject;
 import myInterfaces.ISuspectableObject;
 import myInterfaces.IThinkingObject;
@@ -14,15 +16,14 @@ import states.WorldState;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Person extends AliveObject implements IThinkingObject, IEnchantableObject, ISuspectableObject {
+public class Person extends AliveObject implements IThinkingObject{
     private ArrayList<PhysicalObject> inventory;
-
     {
         inventory = new ArrayList<>();
     }
 
-    public Person(String nm, int amount, String dcrptn){
-        super(nm, amount, dcrptn);
+    public Person(String nm, int amount, String description) throws WrongAmountException {
+        super(nm, amount, description);
     }
     public Person(String nm, int amount){
         super(nm, amount);
@@ -49,7 +50,11 @@ public class Person extends AliveObject implements IThinkingObject, IEnchantable
     {
         String[] bodyParts = {"язык", "щёки", "мозг", "сердце", "ноги", "голова"};
         for (String bpart: bodyParts){
-            addObjectParts(new BodyPart(bpart));
+            try {
+                addObjectParts(new BodyPart(bpart));
+            } catch (WrongAmountException e) {
+                System.out.println("У человека отсутствуют органы");
+            }
         }
     }
 
@@ -81,69 +86,37 @@ public class Person extends AliveObject implements IThinkingObject, IEnchantable
         return false;
     }
 
-
-    public void sleep(){
-        AliveObjectState sleeping = new AliveObjectState("спит");
-        if (isHaveState(sleeping)) {
-            this.removeState(sleeping);
-            System.out.println(this + " больше не " + sleeping.stateName());
-        }
-        else if (WorldCondition.getInstance().isHaveState(new WorldState("время", Daytime.NIGHT.toString()))){
-            this.addState(sleeping);
-            System.out.println(this + " " + sleeping.stateName());
-        }
-    }
-
-    public void say(String phrase){
+    public void say(String phrase) {
         System.out.println(this + " говорит " + phrase);
     }
 
-    public void say(String phrase, Person aim){
+    public void say(String phrase, Person aim) throws LogicalContradiction{
         if(this.getLocation().equals(aim.getLocation())) {
             System.out.println(this + " говорит " + phrase + ". Обращаяется к " + aim);
         }
+        else { throw new LogicalContradiction(this + " и " + aim + " находятся в разных локациях");}
     }
 
-    public void walk(Locations locations){
-        if (getLocation().equals(locations)){
-            System.out.println(this + " ходит по " + locations);
-        }
-        else{
-            System.out.println(this + " идёт из " + getLocation() + " в " + locations);
-            setLocation(locations);
-        }
-    }
-
-    public void walk(PhysicalObject aim) {
-        System.out.println(this + " идёт к " + aim + " в " + aim.getLocation());
-        setLocation(aim.getLocation());
-    }
-
-    public void shake(String bodyPart){
+    public void shake(String bodyPart) throws LogicalContradiction, WrongAmountException {
         if (isHavePart(new BodyPart(bodyPart))){
             System.out.println(this + " трясёт " + bodyPart);
         }
-        // если нет, то бросить логическое исключение
+        else {
+            throw new LogicalContradiction(this + " не имеет части тела " + bodyPart);
+        }
     }
 
-    public void see(PhysicalObject object){
+    public void see(PhysicalObject object) throws LogicalContradiction{
         if (object.getLocation().equals(getLocation())){
             System.out.println(this + " увидел " + object);
+        }
+        else{
+            throw new LogicalContradiction(this + " не может увидеть " + object + ": они находятся в разных локациях");
         }
     }
 
     public void disappear(){
         System.out.println(this + " скрывается из " + getLocation());
         setLocation(Locations.SOMEWHERE);
-    }
-
-    @Override
-    public void beEnchanted(){
-        addState(new AliveObjectState("зачарован"));
-    }
-
-    @Override
-    public void beSuspected(){
-        addState(new AliveObjectState("подозрительный"));
     }
 }

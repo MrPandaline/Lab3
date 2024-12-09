@@ -8,8 +8,8 @@ public abstract class MyObject {
         this(nm, "");
     }
 
-    public MyObject(String nm, String dcrptn){
-        description = dcrptn;
+    public MyObject(String nm, String description){
+        this.description = description;
         name = nm;
     }
 

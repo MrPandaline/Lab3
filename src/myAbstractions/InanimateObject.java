@@ -1,13 +1,14 @@
 package myAbstractions;
 
+import myExceptions.WrongAmountException;
 import states.InanimateObjectState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class InanimateObject extends MyCompositeObject{
-    public InanimateObject(String nm, int amount, String dcrptn){
-        super(nm, amount, dcrptn);
+    public InanimateObject(String nm, int amount, String description) throws WrongAmountException {
+        super(nm, amount, description);
     }
     public InanimateObject(String nm, int amount){
         super(nm, amount);

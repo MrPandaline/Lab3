@@ -4,8 +4,7 @@ public enum Locations {
     SOMEWHERE("где-то"),
     CONFESSIONAL("исповедальня"), //Исповедальня
     SLEEPING_ROOM("спальня"),
-    SECRET_ROOM("потаённая комната"),
-    KING_CHEEKS("щёки короля");
+    SECRET_ROOM("потаённая комната");
 
     private final String locationTitle;
 

@@ -2,12 +2,13 @@ package myObjects;
 
 import myAbstractions.MyCompositeObject;
 import myAbstractions.MyObject;
+import myExceptions.WrongAmountException;
 
 import java.util.ArrayList;
 
 public class Image extends MyCompositeObject {
-    public Image(String nm, int amount, String dcrpt){
-        super(nm, amount, dcrpt);
+    public Image(String nm, int amount, String description) throws WrongAmountException {
+        super(nm, amount, description);
     }
     public Image(String nm, int amount){
         super(nm, amount);

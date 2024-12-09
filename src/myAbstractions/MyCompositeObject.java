@@ -1,5 +1,7 @@
 package myAbstractions;
 
+import myExceptions.WrongAmountException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,8 +15,8 @@ public abstract class MyCompositeObject extends PhysicalObject{
     @Override
     public abstract String getDescription();
 
-    public MyCompositeObject(String nm, int amount, String dcrpt){
-        super(nm, amount, dcrpt);
+    public MyCompositeObject(String nm, int amount, String description) throws WrongAmountException {
+        super(nm, amount, description);
     }
     public MyCompositeObject(String nm, int amount){
         super(nm, amount);

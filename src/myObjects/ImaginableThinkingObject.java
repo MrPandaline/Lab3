@@ -2,14 +2,15 @@ package myObjects;
 
 import myAbstractions.InanimateObject;
 import myAbstractions.MyObject;
+import myExceptions.WrongAmountException;
 import myInterfaces.IEnchantableObject;
 import states.InanimateObjectState;
 
 import java.util.ArrayList;
 
 public class ImaginableThinkingObject extends InanimateObject implements IEnchantableObject {
-    public ImaginableThinkingObject(String nm, int amount, String dcrpt){
-        super(nm, amount, dcrpt);
+    public ImaginableThinkingObject(String nm, int amount, String description) throws WrongAmountException {
+        super(nm, amount, description);
     }
     public ImaginableThinkingObject(String nm, int amount){
         super(nm, amount);
@@ -37,7 +38,7 @@ public class ImaginableThinkingObject extends InanimateObject implements IEnchan
         System.out.println(this + " будто хотел сказать " + phrase);
     }
 
-    public void ishake(String bodyPart){
+    public void ishake(String bodyPart) throws WrongAmountException {
         if (isHavePart(new BodyPart(bodyPart))){
             System.out.println(this + " будто трясёт " + bodyPart);
         }

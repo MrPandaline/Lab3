@@ -1,20 +1,19 @@
 package myObjects;
 
-import states.InanimateObjectState;
 import states.WorldState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class WorldCondition {
+public final class World {
     private ArrayList<WorldState> worldStates;
-    private static WorldCondition instance;
+    private static World instance;
 
     {
         worldStates = new ArrayList<>();
     }
 
-    private WorldCondition(WorldState... worldStates){
+    private World(WorldState... worldStates){
         for (WorldState worldState : worldStates){
             this.worldStates.add(worldState);
             System.out.println("Было " + worldState.toString());
@@ -43,16 +42,17 @@ public final class WorldCondition {
 
     public boolean isHaveState(WorldState worldState){
         for(WorldState worldStateIterable : worldStates){
-            if(worldStateIterable.stateName().equals(worldState.stateName())){
+            if(worldStateIterable.stateName().equals(worldState.stateName()) &&
+                    worldStateIterable.stateDescription().equals(worldState.stateDescription())){
                 return true;
             }
         }
         return false;
     }
 
-    public static WorldCondition getInstance(WorldState... worldStates){
+    public static World getInstance(WorldState... worldStates){
         if (instance == null){
-            instance = new WorldCondition(worldStates);
+            instance = new World(worldStates);
         }
         return instance;
     }

@@ -1,6 +1,7 @@
 package myAbstractions;
 
 import myEnums.Locations;
+import myExceptions.WrongAmountException;
 
 public abstract class PhysicalObject extends MyObject{
     final int amount;
@@ -18,13 +19,17 @@ public abstract class PhysicalObject extends MyObject{
         this.amount = amount;
     }
 
-    public PhysicalObject(String nm, int amount, String dcrptn){
-        super(nm, dcrptn);
+    public PhysicalObject(String nm, int amount, String description) throws WrongAmountException{
+        super(nm, description);
+        if (amount <= 0){
+            throw new WrongAmountException("Передано предмету " + this + " некорректное число " + amount +
+                    "оно должно быть положительным");
+        }
         this.amount = amount;
     }
 
     public Locations getLocation(){ return location;}
-    public void setLocation(Locations loca) {this.location = loca;}
+    public void setLocation(Locations location) {this.location = location;}
     public int getAmount(){ return amount;}
 
     @Override
