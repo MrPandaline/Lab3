@@ -12,10 +12,10 @@ public class ImaginableThinkingObject extends InanimateObject implements IEnchan
     public ImaginableThinkingObject(String nm, int amount, String description) throws WrongAmountException {
         super(nm, amount, description);
     }
-    public ImaginableThinkingObject(String nm, int amount){
+    public ImaginableThinkingObject(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public ImaginableThinkingObject(String nm){
+    public ImaginableThinkingObject(String nm) throws WrongAmountException {
         super(nm);
     }
 

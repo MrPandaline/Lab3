@@ -3,7 +3,7 @@ package myObjects;
 import myAbstractions.AliveObject;
 import myAbstractions.MyObject;
 import myAbstractions.PhysicalObject;
-import myEnums.Locations;
+import myEnums.Location;
 import myExceptions.LogicalContradiction;
 import myExceptions.WrongAmountException;
 import myInterfaces.PhysicalObjectArrayListFunc;
@@ -20,10 +20,10 @@ public class Person extends AliveObject implements IThinkingObject{
     public Person(String nm, int amount, String description) throws WrongAmountException {
         super(nm, amount, description);
     }
-    public Person(String nm, int amount){
+    public Person(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public Person(String nm){
+    public Person(String nm) throws WrongAmountException {
         super(nm);
     }
 
@@ -97,8 +97,8 @@ public class Person extends AliveObject implements IThinkingObject{
         }
     }
 
-    public void disappear(){
+    public void disappear() throws WrongAmountException {
         System.out.println(this + " скрывается из " + getLocation());
-        setLocation(Locations.SOMEWHERE);
+        setLocation(Location.SOMEWHERE);
     }
 }

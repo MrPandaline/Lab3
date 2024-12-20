@@ -1,5 +1,4 @@
 package myAbstractions;
-
 public abstract class MyObject {
     private final String name;
     protected final String description;
@@ -35,10 +34,7 @@ public abstract class MyObject {
             return false;
         }
         else {
-            if (obj == this) {
-                return true;
-            }
-            return true;
+            return obj != null;
         }
     }
 

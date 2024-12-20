@@ -1,5 +1,5 @@
 import myEnums.Daytime;
-import myEnums.Locations;
+import myEnums.Location;
 import myExceptions.LogicalContradiction;
 import myExceptions.WrongAmountException;
 import myObjects.*;
@@ -23,6 +23,7 @@ public class Script {
 
     public void playScript() throws WrongAmountException {
         boolean scenatioCompleted = false;
+
         while (!scenatioCompleted) {
             try {
                 World world = World.getInstance();
@@ -75,7 +76,7 @@ public class Script {
                     ((Witch) queen).charm(nation);
                 }
                 world.addWorldState(new WorldState("время", Daytime.NOON.toString()));
-                archbishop.setLocation(Locations.CONFESSIONAL);
+                archbishop.setLocation(Location.CONFESSIONAL);
                 king.walk(archbishop);
                 archbishop.say("что видел и подозревал", king);
                 evilWords.iFallFrom(king.getObjectParts().get(king.
@@ -93,13 +94,13 @@ public class Script {
                 despair.iReown(king.getObjectParts().get(king.
                         getObjectParts().indexOf(new BodyPart("сердце"))), king);
 
-                king.walk(Locations.SLEEPING_ROOM);
+                king.walk(Location.SLEEPING_ROOM);
 
                 byte iterable = 0;
                 while (iterable < COUNT_OF_NIGHTS) {
                     System.out.println("\n" + (iterable + 1) + " ночь");
                     world.addWorldState(new WorldState("время", Daytime.NIGHT.toString()));
-                    queen.setLocation(Locations.SLEEPING_ROOM);
+                    queen.setLocation(Location.SLEEPING_ROOM);
                     queen.sleep();
 
                     king.simulate(new InanimateObjectState("спит"));
@@ -120,11 +121,11 @@ public class Script {
                 }
                 if (queen instanceof Witch) {
                     king.see(queen);
-                    queen.walk(Locations.SECRET_ROOM);
+                    queen.walk(Location.SECRET_ROOM);
                 }
                 scenatioCompleted = true;
             } catch (LogicalContradiction e){
-                System.out.println(e.toString());
+                System.out.println(e.getMessage());
                 System.out.println("Новая итерация сценария");
             }
         }

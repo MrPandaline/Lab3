@@ -1,6 +1,6 @@
 package myEnums;
 
-public enum Locations {
+public enum Location {
     SOMEWHERE("где-то"),
     CONFESSIONAL("исповедальня"), //Исповедальня
     SLEEPING_ROOM("спальня"),
@@ -8,7 +8,7 @@ public enum Locations {
 
     private final String locationTitle;
 
-    Locations(String title) {
+    Location(String title) {
         locationTitle = title;
     }
 

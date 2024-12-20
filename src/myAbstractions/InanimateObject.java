@@ -4,16 +4,16 @@ import myExceptions.WrongAmountException;
 import states.InanimateObjectState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public abstract class InanimateObject extends MyCompositeObject{
     public InanimateObject(String nm, int amount, String description) throws WrongAmountException {
         super(nm, amount, description);
     }
-    public InanimateObject(String nm, int amount){
+    public InanimateObject(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public InanimateObject(String nm){
+    public InanimateObject(String nm) throws WrongAmountException {
         super(nm);
     }
 

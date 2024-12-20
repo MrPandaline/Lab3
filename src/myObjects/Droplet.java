@@ -1,8 +1,7 @@
 package myObjects;
 
-import myAbstractions.AliveObject;
 import myAbstractions.PhysicalObject;
-import myEnums.Locations;
+import myEnums.Location;
 import myExceptions.WrongAmountException;
 
 import static java.lang.Math.abs;
@@ -12,17 +11,23 @@ public class Droplet extends PhysicalObject {
         super(nm, amount, description);
 
     }
-    public Droplet(String nm, int amount){
+    public Droplet(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public Droplet(String nm){
+    public Droplet(String nm) throws WrongAmountException {
         super(nm);
     }
 
     private PhysicalObject location;
 
     {
-        location = new PhysicalObject(super.getLocation().toString()){};
+        try {
+            location = new PhysicalObject(super.getLocation().toString()){};
+        } catch (WrongAmountException e) {
+            System.out.println(e.getMessage());
+            System.out.println("отрицательное число предметов схлопнуло вселенную в точку," +
+                    " сценарий невозможно проиграть из-за произошедшего апокалипсиса");
+        }
     }
 
     public void moveAt(PhysicalObject object){
@@ -30,8 +35,8 @@ public class Droplet extends PhysicalObject {
     }
 
     @Override
-    public Locations getLocation(){
-        for (Locations location : Locations.values()){
+    public Location getLocation(){
+        for (Location location : Location.values()){
             if (location.name().equals(this.location.getName())) {
                 return location;
             }
@@ -39,9 +44,8 @@ public class Droplet extends PhysicalObject {
         return this.location.getLocation();
     }
     @Override
-    public void setLocation(Locations location) {
-        this.location = new PhysicalObject(location.toString()) {
-        };
+    public void setLocation(Location location) throws WrongAmountException {
+        this.location = new PhysicalObject(location.toString()) {};
     }
 
     public void setLocation(PhysicalObject location){ this.location = location; }

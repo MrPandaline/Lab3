@@ -1,7 +1,7 @@
 package myAbstractions;
 
 import myEnums.Daytime;
-import myEnums.Locations;
+import myEnums.Location;
 import myExceptions.LogicalContradiction;
 import myExceptions.WrongAmountException;
 import myInterfaces.IEnchantableObject;
@@ -11,16 +11,15 @@ import states.AliveObjectState;
 import states.WorldState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public abstract class AliveObject extends MyCompositeObject implements IEnchantableObject, ISuspectableObject {
     public AliveObject(String nm, int amount, String description) throws WrongAmountException {
         super(nm, amount, description);
     }
-    public AliveObject(String nm, int amount){
+    public AliveObject(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public AliveObject(String nm){
+    public AliveObject(String nm) throws WrongAmountException {
         super(nm);
     }
     private final ArrayList<AliveObjectState> aliveObjectStates;
@@ -70,17 +69,18 @@ public abstract class AliveObject extends MyCompositeObject implements IEnchanta
             this.removeState(sleeping);
             System.out.println(this + " больше не " + sleeping.stateName());
         }
-        else if (World.getInstance().isHaveState(new WorldState("время", Daytime.NIGHT.toString())) ||
+        else if (World.getInstance().isHaveState(new WorldState(
+                "время", Daytime.NIGHT.toString())) ||
                  World.getInstance().isHaveState(new WorldState("время", Daytime.EVENING.toString()))){
             this.addState(sleeping);
             System.out.println(this + " " + sleeping.stateName());
         }
         else {
-            throw new LogicalContradiction("невозможно уснуть днём");
+            throw new LogicalContradiction("Невозможно уснуть днём");
         }
     }
 
-    public void walk(Locations locations){
+    public void walk(Location locations) throws WrongAmountException {
         if (getLocation().equals(locations)){
             System.out.println(this + " ходит по " + locations);
         }
@@ -90,7 +90,7 @@ public abstract class AliveObject extends MyCompositeObject implements IEnchanta
         }
     }
 
-    public void walk(PhysicalObject aim) {
+    public void walk(PhysicalObject aim) throws WrongAmountException {
         System.out.println(this + " идёт к " + aim + (this.getLocation().equals(aim.getLocation()) ?  "": " в " + aim.getLocation()));
         setLocation(aim.getLocation());
     }

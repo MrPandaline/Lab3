@@ -1,22 +1,21 @@
 package myAbstractions;
 
-import myEnums.Locations;
+import myEnums.Location;
 import myExceptions.WrongAmountException;
 
 public abstract class PhysicalObject extends MyObject{
     final int amount;
-    private Locations location;
+    private Location location;
     {
-        location = Locations.SOMEWHERE;
+        location = Location.SOMEWHERE;
     }
 
-    public PhysicalObject(String nm) {
-        this(nm, 1);
+    public PhysicalObject(String nm) throws WrongAmountException{
+        this(nm, 1 , "");
     }
 
-    public PhysicalObject(String nm, int amount){
-        super(nm);
-        this.amount = amount;
+    public PhysicalObject(String nm, int amount) throws WrongAmountException {
+        this(nm, amount, "");
     }
 
     public PhysicalObject(String nm, int amount, String description) throws WrongAmountException{
@@ -28,8 +27,8 @@ public abstract class PhysicalObject extends MyObject{
         this.amount = amount;
     }
 
-    public Locations getLocation(){ return location;}
-    public void setLocation(Locations location) {this.location = location;}
+    public Location getLocation(){ return location;}
+    public void setLocation(Location location) throws WrongAmountException {this.location = location;}
     public int getAmount(){ return amount;}
 
     @Override

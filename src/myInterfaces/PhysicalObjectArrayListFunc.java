@@ -4,7 +4,7 @@ import myAbstractions.PhysicalObject;
 import java.util.ArrayList;
 
 @FunctionalInterface
-public interface PhysicalObjectArrayListFunc {
+public interface PhysicalObjectArrayListFunc{
     void doWithList(ArrayList<PhysicalObject> arrayList);
 
     static void addToList(ArrayList<PhysicalObject> arrayList, PhysicalObject toAdd){

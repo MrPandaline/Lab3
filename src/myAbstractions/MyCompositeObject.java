@@ -17,10 +17,10 @@ public abstract class MyCompositeObject extends PhysicalObject{
     public MyCompositeObject(String nm, int amount, String description) throws WrongAmountException {
         super(nm, amount, description);
     }
-    public MyCompositeObject(String nm, int amount){
+    public MyCompositeObject(String nm, int amount) throws WrongAmountException {
         super(nm, amount);
     }
-    public MyCompositeObject(String nm){
+    public MyCompositeObject(String nm) throws WrongAmountException {
         super(nm);
     }
 
